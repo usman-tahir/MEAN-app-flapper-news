@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.glyphicon-thumbs-up {
+  cursor: pointer;
+}
+
+.link {
+  font-size: 20px;
+  margin-left: 10px;
+}
