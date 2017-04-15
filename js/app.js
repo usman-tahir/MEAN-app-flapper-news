@@ -12,6 +12,11 @@
           url: '/home',
           templateUrl: '/home.html',
           controller: 'main'
+        })
+        .state('posts', {
+          url: '/post/{id}',
+          templateUrl: '/posts.html',
+          ontroller: 'PostsCtrl'
         });
       $urlRouterProvider.otherwise('home');
     }]);
@@ -36,7 +41,11 @@
       $scope.posts.push({
         title: $scope.title || 'A new post',
         upvotes: 0,
-        link: $scope.link
+        link: $scope.link,
+        comments: [
+          {author: 'John Doe', body: 'Great post!', upvotes: 0},
+          {author: 'Jane Doe', body: 'Great idea!', upvotes: 0}
+        ] // Mock comments
       });
       $scope.title = ''; // Clear the title
       $scope.link = ''; // Clear the link
@@ -46,4 +55,23 @@
       post.upvotes += 1;
     };
   }]);
+
+  app.controller('PostsCtrl', [
+    '$scope',
+    '$stateParameters',
+    'posts',
+    function ($scope, $stateParameters, posts) {
+      $scope.post = posts.posts[$stateParameters.id];
+
+      $scope.addComment = function () {
+        if ($scope.body === '') { return; };
+        $scope.post.comments.push({
+          body: $scope.body,
+          author: 'user',
+          upvotes: 0
+        });
+        $scope.body = '';
+      }
+    }]);
+
 }());
