@@ -8,12 +8,10 @@
     <!-- Custom styling -->
     <link href="./css/styles.css" rel="stylesheet">
   </head>
-  <body ng-app="flapperNews" ng-controller="MainCtrl">
+  <body ng-app="flapperNews">
     <div class="row">
       <div class="col-md-6 col-md-offset-6">
-        <div class="page-header">
-          <h1>Flapper News</h1>
-        </div>
+        <ui-view></ui-view>
         <div ng-repeat="post in posts | orderBy:'-upvotes'">
           <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span>(Upvotes: {{post.upvotes}})
           <span class="link">
@@ -38,7 +36,16 @@
         </form>
       </div>
     </div>
+
+    <!-- home template -->
+    <script type="text/ng-template" id="/home.html">
+      <div class="page-header">
+        <h1>Flapper News</h1>
+      </div>
+    </script>
+
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script>
     <script src="./js/app.js"></script>
   </body>
 </html>
